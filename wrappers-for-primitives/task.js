@@ -1,18 +1,6 @@
-function calculateMortgage() {
-    let percent = window.percent.value;
-    let contribution = window.contribution.value;
-    let amount = window.amount.value;
-    let date = window.date.value;
-
-    let result = calculateTotalMortgage(percent, contribution, amount, date);
-    let span = window.mortageResult;
-    span.textContent = result;
-}
-
 function calculateTotalMortgage(percent, contribution, amount, date) {
 
     // код для задачи №1 писать здесь
-    //return totalAmount;
     function checkDataType(item) {
         if ( typeof item === 'number' ) {
             item = item;
@@ -26,7 +14,23 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
         }
 
         return item;
+    }
+    
+    checkDataType(percent);
+    checkDataType(contribution);
+    checkDataType(amount);
+    checkDataType(date); 
+
+    let now = +new Date();
+    let dueDate = +new Date(date);
+    let months = ( dueDate - now ) / ( 1000 * 60 * 60 * 24 * 30 );
+    let payment = amount - contribution;
+    let monthlyPc = percent / 100 / 12;
+    let payMonthly =  payment * ( monthlyPc + monthlyPc / ( ( (1+monthlyPc)**12) - 1 ) );
+    let totalAmount = ( payMonthly * months ).toFixed(2);
+    return totalAmount;
 }
+
 
 function sayHello() {
     let name = window.personName.value;
