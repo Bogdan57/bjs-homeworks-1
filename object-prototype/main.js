@@ -8,6 +8,17 @@ function initCheckBirthday() {
 
 function checkBirthday(birthday) {
     // код для задачи №1 писать здесь
+    let now = +new Date();
+    birthday = +new Date(birthday);
+    let diff = now - birthday;
+    let age = diff / (365.25 * 24 * 60 * 60 * 1000);
+
+    if (age >= 18) {
+        console.log('Совершеннолетний');
+        return age;
+    } else {
+        console.log('Несовершеннолетний');
+    }
 }
 
 function initPrintAnimalSound() {
@@ -24,7 +35,7 @@ function getAnimalSound(animal) {
     // код для задачи №2 писать здесь
     let sound = animal.sound;
     if (animal === undefined) {
-        console.log(null);
+        null;
     } else {
         console.log(sound);
     }
